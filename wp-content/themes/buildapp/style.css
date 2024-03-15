@@ -72,7 +72,7 @@ a{
 }
 .arrow-list li:before {
     content: "";
-    background-image: url(www.cekli.com/wp-content/themes/buildapp/assets/img/right-arrow.png);
+    background-image: url(https://cekli.com/wp-content/themes/buildapp/assets/img/right-arrow.png);
     background-repeat: no-repeat;
     background-size: contain;
     position: absolute;

@@ -8,8 +8,8 @@
 <channel>
 	<title>
 	Comments on: About Cekli	</title>
-	<atom:link href="www.cekli.com/2024/02/18/about/feed/" rel="self" type="application/rss+xml" />
-	<link>www.cekli.com/2024/02/18/about/</link>
+	<atom:link href="https://cekli.com/2024/02/18/about/feed/" rel="self" type="application/rss+xml" />
+	<link>https://cekli.com/2024/02/18/about/</link>
 	<description>Simple mobile apps</description>
 	<lastBuildDate>Fri, 15 Mar 2024 22:29:27 +0000</lastBuildDate>
 	<sy:updatePeriod>
@@ -20,11 +20,11 @@
 	<item>
 		<title>
 		By: A WordPress Commenter		</title>
-		<link>www.cekli.com/2024/02/18/about/#comment-1</link>
+		<link>https://cekli.com/2024/02/18/about/#comment-1</link>
 
 		<dc:creator><![CDATA[A WordPress Commenter]]></dc:creator>
 		<pubDate>Sun, 18 Feb 2024 13:51:04 +0000</pubDate>
-		<guid isPermaLink="false">www.cekli.com/?p=1#comment-1</guid>
+		<guid isPermaLink="false">https://cekli.com/?p=1#comment-1</guid>
 
 					<description><![CDATA[Hi, this is a comment.
 To get started with moderating, editing, and deleting comments, please visit the Comments screen in the dashboard.
