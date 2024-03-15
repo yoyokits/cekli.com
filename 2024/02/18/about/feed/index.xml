@@ -7,9 +7,9 @@
 	>
 <channel>
 	<title>
-	Comments for Cekli	</title>
-	<atom:link href="www.cekli.com/comments/feed/" rel="self" type="application/rss+xml" />
-	<link>www.cekli.com</link>
+	Comments on: About Cekli	</title>
+	<atom:link href="www.cekli.com/2024/02/18/about/feed/" rel="self" type="application/rss+xml" />
+	<link>www.cekli.com/2024/02/18/about/</link>
 	<description>Simple mobile apps</description>
 	<lastBuildDate>Fri, 15 Mar 2024 22:29:27 +0000</lastBuildDate>
 	<sy:updatePeriod>
@@ -19,7 +19,7 @@
 	<generator>https://wordpress.org/?v=6.4.3</generator>
 	<item>
 		<title>
-		Comment on About Cekli by A WordPress Commenter		</title>
+		By: A WordPress Commenter		</title>
 		<link>www.cekli.com/2024/02/18/about/#comment-1</link>
 
 		<dc:creator><![CDATA[A WordPress Commenter]]></dc:creator>
