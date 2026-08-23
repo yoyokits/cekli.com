@@ -6,55 +6,90 @@ Project instructions for the static marketing site behind **www.cekli.com**.
 
 ## 1. What this repo is
 
-A hand-written static site served by **GitHub Pages from the repository root**,
-on the custom domain in `CNAME`.
+A hand-written static site served by **GitHub Pages from the `docs/` folder** of
+this repository, on the custom domain in `docs/CNAME`.
+
+**This changed on 2026-08-24.** Pages used to publish from the repo root — every
+top-level file was live, including this one (`https://cekli.com/CLAUDE.md`
+returned 200 and served the raw file). The site was moved into `docs/` and the
+Pages source setting switched specifically to stop that: anything left at the
+root is no longer served at all, regardless of what it contains.
 
 Verified facts — do not re-derive them:
 
-- `HEAD https://cekli.com/` returns `Server: GitHub.com` and the root `index.html`.
-- `https://cekli.com/doc/...` serves the `doc/` folder, which proves the publishing
-  source is the **root**, not a subfolder. GitHub Pages only offers root or `/docs`;
-  there is no `/doc` option. A page written into `doc/` is reachable at
-  `cekli.com/doc/…`, never at `cekli.com/`.
-- `.htaccess` is a leftover of the old WordPress export. Apache directives do
-  nothing on GitHub Pages. Ignore it.
-- `.nojekyll` is present so Pages serves files as-is.
+- The actual site content (`index.html`, `404.html`, `robots.txt`, `sitemap.xml`,
+  `.nojekyll`, `CNAME`, `assets/`, `memocam/`, `memoshare/`, `doc/`) was moved with
+  `git mv` from the root into `docs/`, preserving git history and file content
+  byte-for-byte. No file content changed — see §5 for why the move alone was
+  sufficient.
+- GitHub Pages only offers `/` (root) or `/docs` as a source — there is no `/doc`
+  option. The pre-existing `doc/` folder (singular) living at the *repo* root
+  once caused real confusion about which of these two the live source was; it no
+  longer matters, since `doc/` is now itself a subfolder of `docs/`
+  (`docs/doc/…`) rather than a sibling of it.
+- **`CNAME` must live inside whatever folder Pages actually publishes.** It moved
+  to `docs/CNAME` along with everything else — a root-level `CNAME` would be
+  ignored once the source is `/docs`, breaking the custom domain.
+- `.htaccess` is a leftover of the old WordPress export, left at the root. Apache
+  directives do nothing on GitHub Pages, and now it isn't even served. Ignore it.
+- `docs/.nojekyll` is present so Pages serves files as-is.
 
 There is no build step, no framework, no package manager. Plain HTML, CSS and a
 small amount of vanilla JS.
 
-**Preview by double-clicking any `.html` file.** All internal links and assets use
-**relative** paths (`assets/…` from the root, `../assets/…` from a product folder)
-precisely so `file://` works with no local server. Root-absolute paths like
-`/assets/…` would break that — under `file://` the leading `/` resolves to the
-drive root. Keep paths relative when adding pages.
+**Preview by double-clicking any `.html` file inside `docs/`.** All internal links
+and assets use **relative** paths (`assets/…` from `docs/index.html`,
+`../assets/…` from a product folder) precisely so `file://` works with no local
+server — and so the entire site could move from the repo root into `docs/` with
+`git mv` alone, no path edits. Root-absolute paths like `/assets/…` would break
+`file://` preview — under `file://` the leading `/` resolves to the drive root.
+Keep paths relative when adding pages.
 
 Two deliberate exceptions, both correct as-is:
-- **`404.html` uses absolute paths.** GitHub Pages serves it at arbitrary URL
-  depths, so relative paths would resolve differently each time. It is only ever
-  seen on the live site.
+- **`docs/404.html` uses absolute paths** (`/`, `/memocam/`, …). GitHub Pages
+  serves it at arbitrary URL depths, so relative paths would resolve differently
+  each time. It is only ever seen on the live site, never via `file://`.
 - **`<link rel="canonical">`, Open Graph and JSON-LD URLs are absolute.** They must
   be, since crawlers and social scrapers resolve them off-site.
 
 ## 2. Do not touch
 
-**`doc/`** — holds the two **live** privacy policies:
+**`docs/doc/`** — holds the two **live** privacy policies:
 
 | File | Live URL |
 |---|---|
-| `doc/privacy-policy-memocam.html` | `https://cekli.com/doc/privacy-policy-memocam.html` |
-| `doc/privacy-policy-memoshare.html` | `https://cekli.com/doc/privacy-policy-memoshare.html` |
+| `docs/doc/privacy-policy-memocam.html` | `https://cekli.com/doc/privacy-policy-memocam.html` |
+| `docs/doc/privacy-policy-memoshare.html` | `https://cekli.com/doc/privacy-policy-memoshare.html` |
 
 These URLs are almost certainly the ones registered in the **Google Play Console**.
 Google requires a working privacy policy link per app, so moving, renaming, restyling
-or deleting them risks the store listings. Link to them; never recreate them.
-`doc/index.htm` / `index.mhtml` are an unrelated saved Canva page — harmless, leave alone.
+or deleting them risks the store listings. The folder is named `doc/` (singular)
+specifically so the URL path (`/doc/…`) stayed byte-identical when the site moved
+under `docs/` in 2026-08 — do not rename it to `privacy/` or fold it into some
+other structure, and never rename `docs/` itself. Link to the two files; never
+recreate them. `docs/doc/index.htm` / `index.mhtml` are an unrelated saved Canva
+page that happened to live in the same folder — harmless, leave alone.
 
-**The legacy WordPress export** — `wp-admin/`, `wp-content/`, `wp-includes/`,
-`wp-json/`, `category/`, `comments/`, `feed/`, `2024/`, `sample-page/`, `test/`,
-and five `testsimply-static-1-*/` folders. Dead weight from a 2024 static export,
-kept so old links do not 404 and excluded in `robots.txt`. Cleaning it out is a
-separate, deliberate task — ask first.
+**The legacy WordPress export, still at the repo root** — `wp-admin/`,
+`wp-content/`, `wp-includes/`, `wp-json/`, `category/`, `comments/`, `feed/`,
+`2024/`, `sample-page/`. Dead weight from a 2024 static export. It was
+deliberately **not** moved into `docs/` during the 2026-08-24 restructure, so it
+is no longer publicly served at all (Pages only serves `docs/` now) — but it is
+still tracked in git history and still contains the owner's real name in several
+files (e.g. `2024/02/18/about/index.html`). Deleting it outright is a separate,
+deliberate task — ask first. `test/` and the five `testsimply-static-1-*/`
+folders that also sit at the root are **not tracked in git at all** (confirmed
+via `git ls-tree`) — near-duplicate local re-exports of the same old WordPress
+site, never live, safe to delete any time with zero effect on the published
+site; `robots.txt`'s `Disallow` entries for `/test/` etc. are consequently
+no-ops today, harmless but worth knowing.
+
+**`CLAUDE.md` itself, and `README.md`/`.htaccess`, stay at the repo root, outside
+`docs/`, on purpose.** This file used to be published live at
+`cekli.com/CLAUDE.md` when Pages served the root. Keeping it outside `docs/` is
+what stops that — do not move it into `docs/` "for consistency," that undoes the
+fix. If a future reorganization changes the Pages source again, re-check whether
+anything at the root would newly become public.
 
 **Always `git pull` before editing.** The local checkout has been behind origin
 before (the privacy policies were live but missing locally). If git reports
@@ -140,23 +175,41 @@ them as a pair.
 
 ## 5. Site structure
 
+Everything Pages actually publishes lives under `docs/` — that folder **is** the
+site root as far as the browser and GitHub Pages are concerned.
+
 ```
-index.html               Landing page                → cekli.com/
-memocam/index.html       MemoCam product page        → cekli.com/memocam/
-memoshare/index.html     MemoShare product page      → cekli.com/memoshare/
-404.html                 Not-found page
-robots.txt  sitemap.xml  .nojekyll  CNAME
-assets/
-  css/site.css           The entire stylesheet — one file, design tokens at the top
-  js/site.js             Mobile nav + screenshot lightbox. Progressive enhancement only
-  img/memocam/           icon.png, shot-01…shot-10 (shot-04 removed: it was a MemoShare shot)
-  img/memoshare/         icon.png, shot-01…shot-09
-  img/brand/             favicon.svg, og-memocam.png, og-memoshare.png
-doc/                     LIVE PRIVACY POLICIES — read-only, see section 2
+CLAUDE.md                 This file — deliberately OUTSIDE docs/, see §2 and §1
+README.md  .htaccess       Also outside docs/, trivial/inert either way
+2024/  category/  comments/  feed/  sample-page/
+wp-admin/  wp-content/  wp-includes/  wp-json/
+                           Legacy WordPress export — outside docs/ on purpose, see §2
+
+docs/                      GitHub Pages source — everything below is the live site
+  index.html               Landing page                 → cekli.com/
+  memocam/index.html       MemoCam product page          → cekli.com/memocam/
+  memoshare/index.html     MemoShare product page        → cekli.com/memoshare/
+  404.html                 Not-found page
+  robots.txt  sitemap.xml  .nojekyll  CNAME
+  assets/
+    css/site.css           The entire stylesheet — one file, design tokens at the top
+    js/site.js             Mobile nav + screenshot lightbox. Progressive enhancement only
+    img/memocam/           icon.png, shot-01…shot-10 (shot-04 removed: it was a MemoShare shot)
+    img/memoshare/         icon.png, shot-01…shot-09
+    img/brand/             favicon.svg, cekli-logo.png, og-memocam.jpg, og-memoshare.jpg
+  doc/                     LIVE PRIVACY POLICIES at cekli.com/doc/… — read-only, see §2
 ```
 
 Product pages use a folder + `index.html` so the URL is `cekli.com/memocam/`.
-Keep that pattern for any new product.
+Keep that pattern for any new product — and add it under `docs/`, never at the
+repo root.
+
+Moving the whole tree from the root into `docs/` in 2026-08 required **zero
+content edits** to any HTML/CSS/JS file — every internal link was already
+relative (see §1), so a `git mv` of each top-level site item was sufficient.
+Keep that property: never introduce a root-absolute internal link (`/assets/…`)
+outside the two documented exceptions in §1, or a future restructure won't be
+this cheap.
 
 ## 6. Design system
 
@@ -177,7 +230,7 @@ look like one family.
 
 The Cekli mark is an **outlined house with a filled square inside**, above a
 lowercase `cekli` wordmark. The original artwork is kept at
-`assets/img/brand/cekli-logo.png` (1142×1142, the vertical lockup).
+`docs/assets/img/brand/cekli-logo.png` (1142×1142, the vertical lockup).
 
 On the site the mark is redrawn as **inline SVG** in each page's `.brand` link,
 with the wordmark as live text beside it. Inline rather than an `<img>` because
@@ -267,7 +320,7 @@ Render with **headless Edge** instead, which works and needs nothing installed:
 & "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" `
   --headless=new --disable-gpu --no-first-run --user-data-dir=<tmp> `
   --hide-scrollbars --window-size=1280,4400 --virtual-time-budget=6000 `
-  --screenshot=<out.png> "file:///E:/Projects/GitHub/cekli.com/index.html"
+  --screenshot=<out.png> "file:///E:/Projects/GitHub/cekli.com/docs/index.html"
 ```
 
 Then read the PNG. Downscale tall renders with `System.Drawing` before reading.
