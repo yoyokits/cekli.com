@@ -1,0 +1,15 @@
+User-agent: *
+Allow: /
+
+# Legacy WordPress export kept only so old links keep working.
+Disallow: /wp-admin/
+Disallow: /wp-includes/
+Disallow: /wp-json/
+Disallow: /test/
+Disallow: /testsimply-static-1-1710539955/
+Disallow: /testsimply-static-1-1710541361/
+Disallow: /testsimply-static-1-1710542797/
+Disallow: /testsimply-static-1-1710543065/
+Disallow: /testsimply-static-1-1710543118/
+
+Sitemap: https://cekli.com/sitemap.xml
