@@ -105,6 +105,9 @@ git config --global --add safe.directory E:/Projects/GitHub/cekli.com
 mostly mobile apps. Current focus: the **Memo** apps for Android.
 
 Contact: `cekliapps@gmail.com` (used in the privacy policies and the site footer).
+X/Twitter: <https://x.com/cekliapps> — linked from every page's footer ("Follow"
+column) and referenced in `twitter:site`/`twitter:creator` meta and the
+Organization JSON-LD `sameAs` on `docs/index.html`.
 
 ### Rule: no personal name on this site
 
@@ -309,6 +312,28 @@ in the MemoCam gallery.
 - **Do not edit HTML with PowerShell `Get-Content`/`Set-Content`.** In Windows
   PowerShell 5.1 that round-trip corrupts UTF-8 (`—` becomes `â€"`). Use the Edit
   or Write tools, or stick to HTML entities.
+
+### SEO conventions
+
+- `docs/robots.txt` is deliberately just `Allow: /` plus the sitemap line. It
+  used to also `Disallow` the legacy WordPress paths (`/wp-admin/`, `/test/`,
+  …) from when Pages served the repo root; now that Pages only serves `docs/`,
+  those paths already 404, so the rules were dead weight and were removed.
+  Don't re-add `Disallow` entries for paths that live outside `docs/` — they
+  can't be reached at all any more.
+- `docs/sitemap.xml` lists each real page with a `<lastmod>` date. Bump the
+  date for a page when you actually change its content, so it stays a useful
+  freshness signal instead of a stale copy-paste.
+- Every page's `<head>` carries: `title`, `meta description`, `canonical`,
+  full Open Graph (`og:title/description/url/image` + explicit
+  `og:image:width`/`height`), `twitter:card`/`site`/`creator`, and a
+  `schema.org` JSON-LD block (`Organization` on the landing page,
+  `SoftwareApplication` on each product page). Keep all four in sync when
+  copy changes — a stale OG description is what gets shown when the link is
+  shared, not the live page text.
+- The landing page's Organization JSON-LD carries `"sameAs": ["https://x.com/cekliapps"]`.
+  If Cekli ever gains another official account (GitHub, Play developer page,
+  etc.), add it to that same array rather than creating a new JSON-LD block.
 
 ### Seeing the pages (there is no other way to check the design)
 
