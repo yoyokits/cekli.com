@@ -415,6 +415,13 @@ a:hover { text-decoration: underline; }
 .cta p { color: var(--text-2); max-width: 52ch; margin: 16px auto 0; font-size: 1.05rem; }
 .band--dark .cta p { color: #A0A0A0; }
 .cta .btn-row { justify-content: center; margin-top: 32px; }
+.cta-apps {
+  display: grid; gap: clamp(28px, 5vw, 56px);
+  grid-template-columns: repeat(auto-fit, minmax(200px, 240px));
+  justify-content: center; margin: 40px auto 0;
+}
+.cta-apps__item { display: flex; flex-direction: column; align-items: center; gap: 20px; }
+.cta-apps .phone--sm { max-width: 200px; }
 
 /* --- Footer ---------------------------------------------------------------- */
 .site-footer {
