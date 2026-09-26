@@ -104,10 +104,20 @@ git config --global --add safe.directory E:/Projects/GitHub/cekli.com
 **Cekli** is a small independent software studio building medium-sized software,
 mostly mobile apps. Current focus: the **Memo** apps for Android.
 
-Contact: `cekliapps@gmail.com` (used in the privacy policies and the site footer).
-X/Twitter: <https://x.com/cekliapps> — linked from every page's footer ("Follow"
-column) and referenced in `twitter:site`/`twitter:creator` meta and the
-Organization JSON-LD `sameAs` on `docs/index.html`.
+Contact: `cekliapps@gmail.com` — used **only** in the two privacy policies now
+(`docs/doc/…`), which must keep a working contact address for Google Play. As of
+2026-09-08 the email was removed from every marketing page (`docs/index.html`,
+`docs/memocam/`, `docs/memoshare/`, `docs/404.html`) and the Organization JSON-LD
+`email` field: an Indonesia-based operator has no German-style Impressum duty, so
+the public site routes all contact to the X account instead. Do not re-add
+`mailto:` links to the marketing pages; do not remove the email from the privacy
+policies.
+
+X/Twitter: <https://x.com/cekliapps> — the sole public contact channel on the
+site. Linked from every page's footer ("Follow" column and the "Legal & contact"
+list), the landing page's About CTA ("Message us on X"), the 404 footer, and
+referenced in `twitter:site`/`twitter:creator` meta and the Organization JSON-LD
+`sameAs` on `docs/index.html`.
 
 ### Rule: no personal name on this site
 
