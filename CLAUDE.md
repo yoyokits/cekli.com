@@ -142,14 +142,20 @@ A camera that behaves like any other, but stamps every photo and video with the
 place, weather, time and direction — visible on the image *and* written into the
 file's EXIF. Dark theme, because it is used in the viewfinder.
 
-Shipped features: live overlay (city, country, temperature, altitude, GPS,
-compass, speed, date/time — all individually toggled, reorderable, resizable,
-dockable, with colour/opacity); distance from home; dual clock (local + home,
-offline via a bundled IANA timezone database); trip/H-day counter; on-device
-voice tag for the event name; speedometer (numeric or gauge; km/h, mph, m/s,
-knots); photos and HD video with sound; five zoom levels 0.6× / 1× / 2× / 3× / 10×;
-grid lines; token-based file naming; full EXIF write. UI languages: English,
-Indonesian, Spanish, German.
+Shipped features (verified against code 2026-09-27): live overlay (city,
+country, address, temperature, altitude, GPS, compass, speed, date/time, phone
+model, birthday age, copyright text — all individually toggled, reorderable,
+resizable, dockable, with colour/opacity); distance from home; dual clock (local
++ home); H-day countdown shown as `H-3` / `H-Today` / `H+2`; speedometer
+(numeric or gauge; km/h, mph, m/s, knots); photos and HD video with sound; zoom
+buttons built per phone from its real lenses (count and values vary by device —
+never quote a fixed list); grid lines; aspect ratios built per phone; fixed file
+name `MEMOCAM_yyyy-MM-dd_HHmmss_<city or title>.jpg`; full EXIF write; in-gallery
+ShareZone (QR, PIN, hotspot fallback, ZIP). UI languages: English, Indonesian,
+Spanish, German. Internet is used for weather (Open-Meteo) and city/time-zone
+lookup — there is no switch to turn weather off.
+
+NOT built — never claim: voice tag, custom file-name patterns/tokens.
 
 Audience: travellers, hikers and climbers, field and site workers, real estate
 agents, content creators, road trips.
@@ -157,18 +163,27 @@ agents, content creators, road trips.
 ### MemoShare — `com.cekli.memoshare`
 <https://play.google.com/store/apps/details?id=com.cekli.memoshare>
 
-Tagline: **"Stamp many photos. Share offline."**
-The post-capture half: batch-stamp up to 50 photos with the same overlay, edit
-them, and share whole albums over local Wi-Fi. Light theme, because it is used
-for browsing and editing.
+Tagline: **"Stamp your photos. Share the whole album."**
+The post-capture half: stamp photos one at a time, edit them, and share whole
+albums over local Wi-Fi. Light theme, because it is used for browsing and editing.
 
-Shipped features: batch stamping with four item styles (Pill, Light, Outline,
-Badge); large readable photo list grouped by date with filters; Trip view (route
-drawn on a world map with total distance, shareable as one image); crop, filters,
-adjust, beautify (originals never modified); **ShareZone** — the phone runs a small
-local web server, a QR code plus a one-time PIN lets people in the same room open
-a gallery in their browser and download single photos or hundreds at once as a
-streamed ZIP, with no app, account, or internet involved; ZIP/single/system export.
+Shipped features (verified against code 2026-09-27): single-photo stamping with
+15 styles (Pill, Light, Outline, Badge, Minimal, Glass, Cinema, Sticker, Neon,
+Gradient, Smoke, Stamp, Ocean, Gold, Frame) and 9 positions (3×3 grid); photo
+grid grouped by day (5 columns) with date filter and an M-badge filter for
+MemoCam photos; Trip view (route on real OpenStreetMap tiles with total distance
+and a photo collage, frame colour/thickness/spacing/corners, shared as one
+image — not an interactive map); crop, ~36 working filters, adjust, Beautify
+(ML Kit face detection: smooth skin, remove spots, slim face) — originals never
+modified; **ShareZone** — the phone runs a small local web server, a QR code plus
+a per-session PIN lets people in the same room open a gallery in their browser
+and download single photos or hundreds at once as a streamed, resumable ZIP;
+single-photo save and Android share. Internet is used for place names and trip
+map tiles.
+
+NOT built — never claim: stamping many photos at once / "50 photos in one tap"
+(multi-select "Memo" opens only the first photo), in-app ZIP export, place or
+trip filters, "big photos" gallery, templates, PDF export.
 
 ### The pairing
 
@@ -182,9 +197,11 @@ them as a pair.
 - **MemoCloud** and **MemoTeam** are concepts only — never present them as available.
 - **iOS is not shipped.** Android only.
 - Do not invent team size, company history, install counts, ratings, or awards.
-- Claim only what is visible in a current screenshot or confirmed in the MemoCam
-  repo's shipped-feature docs. The repo also contains roadmap items (map overlay,
-  cloud backup, template community, AR compass) that are **not** built.
+- Claim only what is visible in a current screenshot or confirmed in the **code**
+  under `E:\Projects\GitHub\MemoCam\Src`. Do not trust the MemoCam `docs/` or
+  `CLAUDE.md` feature lists — they contain roadmap items that were never built
+  (batch stamping, voice tag, file-name tokens, 7 languages, templates, cloud
+  backup, AR compass). The 2026-09-27 audit found all of these on this site.
 
 ## 5. Site structure
 
