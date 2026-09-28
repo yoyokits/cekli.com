@@ -297,7 +297,7 @@ a:hover { text-decoration: underline; }
   box-shadow: var(--shadow-lg);
 }
 .phone img { border-radius: 22px; width: 100%; height: auto; background: #000; }
-.phone__video { display: block; border: 0; border-radius: 22px; width: 100%; height: auto; aspect-ratio: 707 / 1256; background: #000; }
+.phone__video { display: block; border: 0; border-radius: 22px; width: 100%; height: auto; aspect-ratio: 707 / 1256; background: #000; pointer-events: none; }
 
 /* --- Screenshot gallery ---------------------------------------------------- */
 .shots {
